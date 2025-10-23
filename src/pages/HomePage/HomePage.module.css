@@ -1,0 +1,207 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero {
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: var(--color-secondary);
+}
+
+.heroTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.heroText {
+    font-size: 1.1rem;
+    color: var(--color-text-dark);
+    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding: 10px 0;
+    border-bottom: 2px solid var(--color-secondary);
+}
+
+.section {
+    margin-bottom: 50px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.horizontalGrid {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 10px;
+}
+
+.searchSection {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    text-align: center;
+    text-align: left;
+}
+
+.searchInput {
+    width: 100%;
+    max-width: none;
+    padding: 15px 20px;
+    margin: 0;
+    font-size: 1.1rem;
+    border: 2px solid var(--color-secondary);
+    border-radius: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+.searchInput:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(162, 66, 180, 0.2);
+    outline: none;
+}
+
+.noResults {
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+    padding: 50px 0;
+}
+
+.heroSection {
+    height: 450px;
+    padding: 60px 50px 60px 80px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin: 0 auto 20px auto;
+    max-width: 1200px;
+
+    color: white;
+    border-radius: 10px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image:
+    linear-gradient(rgba(240, 233, 233, 0.5), rgba(255, 255, 255, 0.5)),
+    url('/public/assets/photo_2025-10-23\ 04.10.25.jpeg');
+}
+
+.heroTitle {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    max-width: 50%;
+    text-align: left;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    line-height: 1.1;
+}
+
+.heroText {
+    font-size: 1.4rem;
+    max-width: 45%;
+    text-align: left;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.searchSection {
+    max-width: 100%;
+    padding: 10px 20px 20px 20px;
+    text-align: left;
+    margin: 0;
+}
+
+.searchInput {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* СТИЛІ ДЛЯ ГОРИЗОНТАЛЬНОЇ СІТКИ (Типи квітів, Додаткові пропозиції) */
+.horizontalGrid {
+    display: flex;
+
+    /* Дозволяємо горизонтальну прокрутку */
+    overflow-x: auto;
+
+    /* Приховуємо стандартну смугу прокрутки (для чистоти дизайну) */
+    -webkit-overflow-scrolling: touch;
+    /* для iOS */
+    scrollbar-width: none;
+
+    gap: 20px;
+    padding-bottom: 20px;
+    /* Даємо простір на випадок появи смуги прокрутки */
+    max-width: none;
+}
+
+/* Приховуємо смугу прокрутки для Chrome/Safari */
+.horizontalGrid::-webkit-scrollbar {
+    display: none;
+}
+
+/* фіксована ширина для прокрутки */
+.horizontalGrid > div {
+    flex: 0 0 auto;
+    width: 280px;
+}
+
+/* КНОПКА "ДИВИТИСЬ БІЛЬШЕ" (для вертикальної сітки) */
+.showMoreButton {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: block;
+    margin: 20px auto 40px auto;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.showMoreButton:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    margin-top: 10px;
+}

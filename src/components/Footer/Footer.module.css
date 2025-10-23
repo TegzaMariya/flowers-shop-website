@@ -1,0 +1,29 @@
+.footer {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 20px 50px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.socials a {
+    margin-left: 20px;
+    color: var(--color-text-light);
+    transition: opacity 0.2s;
+}
+
+.socials a:hover {
+    opacity: 0.8;
+}
+
+.content p {
+    font-size: 0.9rem;
+}

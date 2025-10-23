@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Outfit:wght@300&family=PT+Sans+Narrow:wght@400;700&family=Pacifico&family=Shadows+Into+Light&display=swap');
+
+:root {
+    --color-primary: #8a3f8a;
+    --color-secondary: #e6a7c3;
+    --color-background-light: #fbebf1;
+    --color-text-dark: #333333;
+    --color-text-light: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: var(--color-background-light);
+    color: var(--color-text-dark);
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Стиль для заголовка Flowers shop */
+.title {
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    background: linear-gradient(180deg, #f7d9e4, #e6a7c3);
+    padding: 5px 15px;
+    display: inline-block;
+}
+
+/*КРИТИЧНИЙ CSS ДЛЯ ЗАПОБІГАННЯ ПРОВИСАННЮ (FOUC)*/
+
+.card {
+    box-sizing: border-box;
+    width: 280px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    min-height: 350px;
+}
+
+/* Забезпечуємо роботу горизонтальної прокрутки */
+.horizontalGrid {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 20px;
+}

@@ -1,0 +1,39 @@
+.button {
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
+.primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+
+.secondary:hover {
+    background-color: #f7e0f7;
+}
+
+.icon {
+    background: none;
+    padding: 5px;
+    font-size: 1.5rem;
+    color: var(--color-text-dark);
+}
+
+.icon:hover {
+    color: var(--color-primary);
+}
