@@ -11,7 +11,8 @@
     "lint": "eslint . --ext js,jsx,ts,tsx",
     "format": "prettier --write .",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "lint:staged": "echo 'Skipping lint for now'"
   },
   "dependencies": {
     "react": "^19.1.1",
