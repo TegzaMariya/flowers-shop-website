@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react'; 
+import { useParams, Link } from 'react-router-dom'; 
 import Button from '../../components/UI/Button';
 import styles from './ProductPage.module.css';
 import { PRODUCTS } from '../../utils/constants';
+import { useCart } from '../../contexts/CartContext'; 
 
 const ProductPage = () => {
-
-    const product = PRODUCTS[0]; 
+    const { id } = useParams(); 
+    const product = PRODUCTS.find(p => p.id === parseInt(id)) || PRODUCTS[1]; 
+    const [quantity, setQuantity] = useState(1); 
+    const [showNotification, setShowNotification] = useState(false);
     
+    const { addToCart } = useCart();
+
     if (!product) {
-        return <h1>Немає доступних продуктів для відображення</h1>;
+        return <h1>Продукт не знайдено</h1>;
     }
 
     const handleAddToCart = () => {
-        alert(`Товар "${product.name}" додано до кошика!`);
+        addToCart(product, 1); 
+        setShowNotification(true); 
     };
 
     return (
         <div className={styles.container}>
             <div className={styles.productWrapper}>
                 
-                {/* Зображення */}
                 <div className={styles.imageContainer}>
                     <img 
                         src={`/assets/${product.image}`} 
@@ -28,14 +34,12 @@ const ProductPage = () => {
                     />
                 </div>
                 
-                {/* Деталі */}
                 <div className={styles.details}>
-                    <h1 className="title">Flowers shop</h1> 
-                    
+                    <h1 className="title">Flowers shop</h1>
                     <h2 className={styles.productName}>{product.name}</h2>
                     
                     <p className={styles.productDescription}>
-                        Опис: Гарні, пахучі, ніжні голандські троянди, {product.quantity}
+                        Кількість квітів у букеті: {product.quantity}
                     </p>
                     
                     <p className={styles.price}>{product.price} грн.</p>
@@ -49,6 +53,17 @@ const ProductPage = () => {
                     </Button>
                 </div>
             </div>
+
+            {showNotification && (
+                <div className={styles.footerNotification}>
+                    <span>
+                        ✅"{product.name}" успішно додано до кошика!
+                    </span>
+                    <Link to="/cart" className={styles.viewCartButton}>
+                        Перейти до кошика
+                    </Link>
+                </div>
+            )}
         </div>
     );
 };

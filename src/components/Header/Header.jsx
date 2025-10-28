@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -7,28 +8,17 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-
       <div className={styles.logo}>
-        <a href="/" className={styles.title}>
+        <Link to="/" className={styles.title}>
           Flowers shop
-        </a>
+        </Link>
       </div>
-
-      <nav className={styles.nav}>
-        <span className={styles.navLink}>Головна</span>
-        <span className={styles.navLink}>Послуги</span>
-        <span className={styles.navLink}>Про нас</span>
-      </nav>
-
       <div className={styles.icons}>
-        <span className={styles.iconLink}>🛒</span> 
+        <Link to="/cart" className={styles.iconLink}>🛒</Link> 
         
         {isAuth ? (
           <div className={styles.authInfo}>
-             <span className={styles.iconLink}>👤</span>
-             
-             {user && user.name && <span className={styles.userName}>{user.name}</span>}
-             
+             <span className={styles.userName}>{user.name}</span>
              <button 
                 onClick={logout} 
                 className={styles.logoutButton}
@@ -37,7 +27,7 @@ const Header = () => {
              </button>
           </div>
         ) : (
-          <span className={styles.iconLink}>👤</span>
+          <Link to="/auth" className={styles.iconLink}>👤</Link>
         )}
       </div>
     </header>

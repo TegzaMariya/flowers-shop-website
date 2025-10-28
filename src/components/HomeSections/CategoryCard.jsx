@@ -1,12 +1,13 @@
 import React from 'react';
-import styles from './ProductCard.module.css';
+import { Link } from 'react-router-dom';
+import styles from './ProductCard.module.css'; 
 
 const CategoryCard = ({ item }) => {
     if (!item) return null;
 
     return (
         <div className={styles.card}>
-            <div className={styles.productLink}> 
+            <div className={styles.productLink}>
 
                 <div className={styles.imageWrapper}> 
                     <img 
@@ -18,9 +19,6 @@ const CategoryCard = ({ item }) => {
                 
                 <div className={styles.info}>
                     <h3 className={styles.name}>{item.name}</h3>
-
-                    <p className={styles.label}>Переглянути деталі</p>
-                    
                 </div>
             </div>
         </div>

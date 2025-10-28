@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../UI/Button';
 import styles from './ProductCard.module.css';
 import { useCart } from '../../contexts/CartContext'; 
@@ -6,8 +7,6 @@ import { useCart } from '../../contexts/CartContext';
 const ProductCard = ({ product }) => { 
     
     const { addToCart } = useCart(); 
-
-    if (!product) return null; 
 
     const hasPrice = product.price && product.quantity; 
     
@@ -17,11 +16,12 @@ const ProductCard = ({ product }) => {
         console.log(`Товар ${product.name} додано до кошика!`);
     };
 
+    if (!product) return null; 
+
     return (
         <div className={styles.card}>
 
-            <div className={styles.productLink}>
-                
+            <Link to={`/product/${product.id}`} className={styles.productLink}>
                 <div className={styles.imageWrapper}> 
                 <img
                     src={`/assets/${product.image}`} 
@@ -30,6 +30,7 @@ const ProductCard = ({ product }) => {
                 />
                 </div>
 
+                <div className={styles.info}></div>
                 
                 <div className={styles.info}>
                     <h3 className={styles.name}>{product.name}</h3>
@@ -43,7 +44,7 @@ const ProductCard = ({ product }) => {
                         <p className={styles.label}>Переглянути деталі</p>
                     )}
                 </div>
-            </div> 
+            </Link>
 
             {hasPrice && (
                 <div className={styles.buttonWrapper}>

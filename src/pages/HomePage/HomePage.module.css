@@ -99,42 +99,44 @@
 .heroSection {
     height: 450px;
     padding: 60px 50px 60px 80px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-
+    align-items: center;
+    text-align: center;
     margin: 0 auto 20px auto;
     max-width: 1200px;
-
     color: white;
     border-radius: 10px;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-image:
-    linear-gradient(rgba(240, 233, 233, 0.5), rgba(255, 255, 255, 0.5)),
-    url('/assets/2007.jpg');
+        linear-gradient(rgba(240, 233, 233, 0.5), rgba(255, 255, 255, 0.5)),
+        url('/assets/2007.jpg');
 }
 
 .heroTitle {
+    display: flex;
     font-size: 3.5rem;
     font-weight: 900;
     margin-bottom: 15px;
-    max-width: 50%;
-    text-align: left;
+    max-width: 60%;
+    text-align: center;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
     line-height: 1.1;
 }
 
 .heroText {
+    display: flex;
     font-size: 1.4rem;
-    max-width: 45%;
-    text-align: left;
+    max-width: 600px;
+    text-align: center;
     margin-bottom: 20px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 15px 30px;
+    border-radius: 8px;
 }
 
 .searchSection {
@@ -148,36 +150,25 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* СТИЛІ ДЛЯ ГОРИЗОНТАЛЬНОЇ СІТКИ (Типи квітів, Додаткові пропозиції) */
 .horizontalGrid {
     display: flex;
-
-    /* Дозволяємо горизонтальну прокрутку */
     overflow-x: auto;
-
-    /* Приховуємо стандартну смугу прокрутки (для чистоти дизайну) */
     -webkit-overflow-scrolling: touch;
-    /* для iOS */
     scrollbar-width: none;
-
     gap: 20px;
     padding-bottom: 20px;
-    /* Даємо простір на випадок появи смуги прокрутки */
     max-width: none;
 }
 
-/* Приховуємо смугу прокрутки для Chrome/Safari */
 .horizontalGrid::-webkit-scrollbar {
     display: none;
 }
 
-/* фіксована ширина для прокрутки */
-.horizontalGrid > div {
+.horizontalGrid>div {
     flex: 0 0 auto;
     width: 280px;
 }
 
-/* КНОПКА "ДИВИТИСЬ БІЛЬШЕ" (для вертикальної сітки) */
 .showMoreButton {
     background: var(--color-secondary);
     color: var(--color-primary);
@@ -204,4 +195,79 @@
     color: var(--color-primary);
     margin-bottom: 20px;
     margin-top: 10px;
+}
+
+.filterContainer {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.filterSection {
+    margin: 20px 0 30px 0;
+    padding: 15px 0;
+    border-top: 2px solid var(--color-secondary);
+    border-bottom: 2px solid var(--color-secondary);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filterTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.filterButtons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.priceButton {
+    background: white;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.priceButton:hover {
+    background-color: var(--color-secondary);
+}
+
+.activeFilter {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.activeFilter:hover {
+    background-color: var(--color-primary);
+    opacity: 0.9;
+}
+
+.resetButton {
+    background: none;
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.resetButton:hover {
+    opacity: 0.7;
 }

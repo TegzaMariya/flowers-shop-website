@@ -1,8 +1,8 @@
 export const PRODUCTS = [
     { id: 101, name: "Чайна троянда", price: 6800, quantity: "9 шт.", image: "101.jpg", type: 'Букети' },
     { id: 102, name: "151 троянда", price: 12835, quantity: "151 шт.", image: "102.jpg", type: 'Букети' },
-    { id: 103, name: "Півонії 45 шт.", price: 10775, quantity: "45 шт.", image: "103.jpg", type: 'Букети' },
-    { id: 104, name: "Гортензія 9 шт.", price: 4930, quantity: "9 шт.", image: "104.jpg", type: 'Букети' },
+    { id: 103, name: "Півонії", price: 10775, quantity: "45 шт.", image: "103.jpg", type: 'Букети' },
+    { id: 104, name: "Гортензія", price: 4930, quantity: "9 шт.", image: "104.jpg", type: 'Букети' },
     { id: 105, name: 'Весняний мікс', price: 5900, quantity: '51 шт.', image: '105.jpg', type: 'Троянди/Матіола/Інше' },
     { id: 106, name: 'Сонячний настрій', price: 4200, quantity: '25 шт.', image: '106.jpg', type: 'Троянди' },
     { id: 107, name: 'Королівський букет', price: 9500, quantity: '101 шт.', image: '107.jpg', type: 'Півонії' },
