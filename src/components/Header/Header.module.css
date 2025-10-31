@@ -34,7 +34,13 @@
 
 .icons {
     display: flex;
-    gap: 20px;
+    gap: 15px;
+}
+
+.cartIcon {
+    width: 30px;
+    height: 30px;
+    display: block;
 }
 
 .iconLink {
@@ -42,6 +48,8 @@
     font-size: 1.6rem;
     color: var(--color-text-dark);
     transition: color 0.2s;
+    display: flex;
+    align-items: center;
 }
 
 .iconLink:hover {

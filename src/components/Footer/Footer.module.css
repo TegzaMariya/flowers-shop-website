@@ -1,8 +1,7 @@
 .footer {
     background-color: var(--color-primary);
-    color: var(--color-text-light);
+    color: white;
     padding: 20px 50px;
-    text-align: center;
     margin-top: 50px;
 }
 
@@ -14,14 +13,24 @@
     margin: 0 auto;
 }
 
-.socials a {
-    margin-left: 20px;
-    color: var(--color-text-light);
-    transition: opacity 0.2s;
+.socialsContainer {
+    display: flex;
+    align-items: center;
 }
 
-.socials a:hover {
-    opacity: 0.8;
+.contactLink {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-right: 1px;
+    margin-top: 5%;
+}
+
+.socialIcon {
+    width: 23px;
+    height: 23px;
 }
 
 .content p {

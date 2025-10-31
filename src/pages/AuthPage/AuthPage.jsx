@@ -61,7 +61,6 @@ const AuthPage = () => {
                         autoComplete="current-password"
                     />
                     
-                    {/* Додаткові поля для реєстрації, якщо не Вхід */}
                     {!isLogin && (
                         <input 
                             type="password" 
@@ -79,7 +78,6 @@ const AuthPage = () => {
                     </Button>
                 </form>
 
-                {/* ПЕРЕМИКАЧ РЕЖИМІВ */}
                 <p className={styles.toggleText}>
                     {isLogin ? 'Немає акаунту?' : 'Вже зареєстровані?'} 
                     <button 

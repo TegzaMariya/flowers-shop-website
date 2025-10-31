@@ -14,7 +14,13 @@ const Header = () => {
         </Link>
       </div>
       <div className={styles.icons}>
-        <Link to="/cart" className={styles.iconLink}>🛒</Link> 
+        <Link to="/cart" className={styles.iconLink}>
+          <img
+            src="/assets/shopping-bag.jpg"
+            alt="Кошик"
+            className={styles.cartIcon}
+          />
+        </Link> 
         
         {isAuth ? (
           <div className={styles.authInfo}>
@@ -27,7 +33,13 @@ const Header = () => {
              </button>
           </div>
         ) : (
-          <Link to="/auth" className={styles.iconLink}>👤</Link>
+            <Link to="/auth" className={styles.iconLink}>
+              <img
+                src="/assets/icon-my-account.jpg"
+                alt="Вхід"
+                className={styles.cartIcon}
+              />
+            </Link>
         )}
       </div>
     </header>

@@ -35,8 +35,7 @@ const ProductPage = () => {
                 </div>
                 
                 <div className={styles.details}>
-                    <h1 className="title">Flowers shop</h1>
-                    <h2 className={styles.productName}>{product.name}</h2>
+                    <h1 className={styles.productName}>{product.name}</h1>
                     
                     <p className={styles.productDescription}>
                         Кількість квітів у букеті: {product.quantity}
