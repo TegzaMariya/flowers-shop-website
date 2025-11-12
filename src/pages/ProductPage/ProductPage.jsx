@@ -18,8 +18,8 @@ const ProductPage = () => {
     }
 
     const handleAddToCart = () => {
-        addToCart(product, 1); 
-        setShowNotification(true); 
+        addToCart({ ...product, count: quantity });
+        setShowNotification(true);
     };
 
     return (
@@ -42,6 +42,18 @@ const ProductPage = () => {
                     </p>
                     
                     <p className={styles.price}>{product.price} грн.</p>
+
+                    <div className={styles.quantityWrapper}>
+                        <label htmlFor="quantity">Кількість:</label>
+                        <input 
+                            type="number" 
+                            id="quantity" 
+                            min="1" 
+                            value={quantity} 
+                            onChange={(e) => setQuantity(Number(e.target.value))}
+                            className={styles.quantityInput}
+                        />
+                    </div>
                     
                     <Button 
                         variant="primary" 
@@ -56,7 +68,7 @@ const ProductPage = () => {
             {showNotification && (
                 <div className={styles.footerNotification}>
                     <span>
-                        ✅"{product.name}" успішно додано до кошика!
+                        ✅ "{product.name}" успішно додано до кошика!
                     </span>
                     <Link to="/cart" className={styles.viewCartButton}>
                         Перейти до кошика

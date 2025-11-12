@@ -1,39 +1,63 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useAuthApi } from '../hooks/useAuthAPI';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [isAuth, setIsAuth] = useState(false);
-    const [user, setUser] = useState(null); 
+  const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState(null);
+  const { login: loginApi, register: registerApi } = useAuthApi();
 
-    const login = (email, password) => {
-        if (email && password) {
-            setIsAuth(true);
-            setUser({ email: email, name: email.split('@')[0] || 'Користувач' });
-            return true;
-        }
-        return false;
-    };
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedAuth = localStorage.getItem('isAuth') === 'true';
+    if (storedUser && storedAuth) {
+      setUser(storedUser);
+      setIsAuth(true);
+    }
+  }, []);
 
-    const logout = () => {
-        setIsAuth(false);
-        setUser(null);
-    };
+  const login = async (email, password) => {
+    const data = await loginApi(email, password);
+    if (data) {
+      setUser(data);
+      setIsAuth(true);
+      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('isAuth', 'true');
+      return true;
+    }
+    return false;
+  };
 
-    const value = {
-        isAuth,
-        user,
-        login,
-        logout,
-    };
+  const register = async (email, password, name) => {
+    const data = await registerApi(email, password, name);
+    if (data) {
+      setUser(data);
+      setIsAuth(true);
+      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('isAuth', 'true');
+      return true;
+    }
+    return false;
+  };
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  const logout = () => {
+    setUser(null);
+    setIsAuth(false);
+    localStorage.removeItem('user');
+    localStorage.removeItem('isAuth');
+  };
+
+  return (
+    <AuthContext.Provider value={{ isAuth, user, login, register, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {
-    const context = useContext(AuthContext);
-    if (!context) {
-        throw new Error('useAuth повинен використовуватися в межах AuthProvider');
-    }
-    return context;
+  const context = useContext(AuthContext);
+  if (!context)
+    throw new Error('useAuth повинен використовуватися всередині AuthProvider');
+  return context;
 };

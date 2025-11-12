@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import Button from '../../components/UI/Button';
 import styles from './AuthPage.module.css';
@@ -12,23 +12,28 @@ const AuthPage = () => {
     const { login, isAuth } = useAuth(); 
     const navigate = useNavigate();
 
-    if (isAuth) {
-        navigate('/');
-        return null; 
-    }
+    useEffect(() => {
+        if (isAuth) {
+            navigate('/');
+        }
+    }, [isAuth, navigate]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         
+        let success = false;
+
         if (isLogin) {
-            if (login(email, password)) {
+            success = await login(email, password); 
+            
+            if (success) {
                 alert(`Ласкаво просимо, ${email}!`);
             } else {
                 alert('Помилка входу. Спробуйте інший логін/пароль.');
             }
         } else {
             alert('Реєстрація успішна! Виконується автоматичний вхід...');
-            login(email, password);
+            success = await login(email, password);
         }
     };
 
