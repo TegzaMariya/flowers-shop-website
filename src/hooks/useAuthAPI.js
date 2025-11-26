@@ -1,37 +1,51 @@
+import { auth } from '../../config';
+import { 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword,
+    updateProfile 
+} from 'firebase/auth';
+
 export const useAuthApi = () => {
-  const login = async (email, password) => {
-    try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
-      if (!response.ok) throw new Error('Помилка при логіні');
-      const data = await response.json();
+    const login = async (email, password) => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-      return {
-        email,
-        name: data.name || email.split('@')[0],
-      };
-    } catch (error) {
-      console.error('Помилка авторизації:', error);
-      return null;
-    }
-  };
+            return {
+                email: user.email,
+                uid: user.uid,
+                name: user.displayName || user.email.split('@')[0],
+            };
+        } catch (error) {
+            console.error('Помилка авторизації Firebase:', error.code, error.message);
+            
+            return null;
+        }
+    };
 
-  const register = async (email, password, name) => {
-    try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        body: JSON.stringify({ email, password, name }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      if (!response.ok) throw new Error('Помилка при реєстрації');
-      const data = await response.json();
-      console.log('Фейкова реєстрація успішна:', data);
+    const register = async (email, password, name = '') => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-      return { email, name };
-    } catch (error) {
-      console.error('Помилка при реєстрації:', error);
-      return null;
-    }
-  };
+            if (name) {
+                await updateProfile(user, {
+                    displayName: name,
+                });
+            }
+            
+            console.log('Реєстрація Firebase успішна:', user);
 
-  return { login, register };
+            return { 
+                email: user.email, 
+                uid: user.uid,
+                name: name || user.email.split('@')[0]
+            };
+        } catch (error) {
+            console.error('Помилка при реєстрації Firebase:', error.code, error.message);
+            return null;
+        }
+    };
+
+    return { login, register };
 };

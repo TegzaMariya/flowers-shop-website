@@ -1,30 +1,37 @@
 import { useState } from 'react';
+import { db } from '../../config';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export const useCheckout = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const checkout = async ({ name, phone, delivery, payment, items, total }) => {
+    const checkout = async ({ name, phone, delivery, payment, items, total, userId = null }) => {
         setLoading(true);
         setError(null);
 
+        const orderData = {
+            name, 
+            phone, 
+            delivery, 
+            payment, 
+            items, 
+            total,
+            userId: userId, 
+            createdAt: serverTimestamp(),
+            status: 'pending',
+        };
+
         try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, phone, delivery, payment, items, total }),
-            });
+            const docRef = await addDoc(collection(db, "orders"), orderData);
 
-            if (!response.ok) throw new Error('Помилка при оформленні замовлення');
-
-            const data = await response.json();
-            console.log('✅ Фейкове замовлення створене:', data);
+            console.log('✅ Замовлення успішно створене у Firestore з ID:', docRef.id);
 
             setLoading(false);
             return true;
         } catch (err) {
-            console.error(err);
-            setError(err.message || 'Щось пішло не так');
+            console.error('Помилка при збереженні замовлення у Firestore:', err);
+            setError('Помилка при оформленні замовлення. Спробуйте пізніше.');
             setLoading(false);
             return false;
         }

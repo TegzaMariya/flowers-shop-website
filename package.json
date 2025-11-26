@@ -12,9 +12,11 @@
     "format": "prettier --write .",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "lint:staged": "echo 'Skipping lint for now'"
+    "lint:staged": "echo 'Skipping lint for now'",
+    "seed": "node --experimental-json-modules seedFirebase.js"
   },
   "dependencies": {
+    "firebase": "^12.6.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.4"

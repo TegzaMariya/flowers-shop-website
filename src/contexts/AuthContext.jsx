@@ -1,55 +1,59 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useAuthApi } from '../hooks/useAuthAPI';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../../config';
+import { useAuthApi } from '../hooks/useAuthAPI'; 
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); 
   const { login: loginApi, register: registerApi } = useAuthApi();
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    const storedAuth = localStorage.getItem('isAuth') === 'true';
-    if (storedUser && storedAuth) {
-      setUser(storedUser);
-      setIsAuth(true);
-    }
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUser({
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          name: firebaseUser.displayName,
+        });
+        setIsAuth(true);
+      } else {
+        setUser(null);
+        setIsAuth(false);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const login = async (email, password) => {
-    const data = await loginApi(email, password);
-    if (data) {
-      setUser(data);
-      setIsAuth(true);
-      localStorage.setItem('user', JSON.stringify(data));
-      localStorage.setItem('isAuth', 'true');
-      return true;
-    }
-    return false;
+    const result = await loginApi(email, password); 
+    return result !== null; 
   };
 
   const register = async (email, password, name) => {
-    const data = await registerApi(email, password, name);
-    if (data) {
-      setUser(data);
-      setIsAuth(true);
-      localStorage.setItem('user', JSON.stringify(data));
-      localStorage.setItem('isAuth', 'true');
-      return true;
-    }
-    return false;
+    const result = await registerApi(email, password, name);
+    return result !== null; 
   };
 
-  const logout = () => {
-    setUser(null);
-    setIsAuth(false);
-    localStorage.removeItem('user');
-    localStorage.removeItem('isAuth');
+  const logout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Помилка при виході з Firebase:", error);
+    }
   };
+
+  if (loading) {
+      return <div>Завантаження...</div>; 
+  }
 
   return (
-    <AuthContext.Provider value={{ isAuth, user, login, register, logout }}>
+    <AuthContext.Provider value={{ isAuth, user, login, register, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

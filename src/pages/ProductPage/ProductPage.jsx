@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom'; 
 import Button from '../../components/UI/Button';
 import styles from './ProductPage.module.css';
@@ -7,15 +7,46 @@ import { useCart } from '../../contexts/CartContext';
 
 const ProductPage = () => {
     const { id } = useParams(); 
-    const product = PRODUCTS.find(p => p.id === parseInt(id)) || PRODUCTS[1]; 
+
+    const [currentProduct, setCurrentProduct] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    
     const [quantity, setQuantity] = useState(1); 
     const [showNotification, setShowNotification] = useState(false);
     
     const { addToCart } = useCart();
 
-    if (!product) {
-        return <h1>Продукт не знайдено</h1>;
+    useEffect(() => {
+        const fetchProduct = async () => {
+            setIsLoading(true);
+            try {  
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                const fetchedProduct = PRODUCTS.find(p => p.id === parseInt(id)); 
+
+                if (fetchedProduct) {
+                    setCurrentProduct(fetchedProduct);
+                } else {
+                }
+            } catch (error) {
+                console.error("Помилка завантаження продукту:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchProduct();
+    }, [id]);
+
+    if (isLoading) {
+        return <h1 className={styles.loading}>Завантаження продукту...</h1>;
     }
+
+    if (!currentProduct) {
+        return <h1 className={styles.error}>Продукт не знайдено.</h1>;
+    }
+
+    const product = currentProduct;
 
     const handleAddToCart = () => {
         addToCart({ ...product, count: quantity });
