@@ -26,7 +26,6 @@ a {
     color: inherit;
 }
 
-/* Стиль для заголовка Flowers shop */
 .title {
     font-size: 3rem;
     font-weight: 500;
@@ -36,8 +35,6 @@ a {
     display: inline-block;
 }
 
-/*КРИТИЧНИЙ CSS ДЛЯ ЗАПОБІГАННЯ ПРОВИСАННЮ (FOUC)*/
-
 .card {
     box-sizing: border-box;
     width: 280px;
@@ -46,10 +43,21 @@ a {
     min-height: 350px;
 }
 
-/* Забезпечуємо роботу горизонтальної прокрутки */
 .horizontalGrid {
     display: flex;
     overflow-x: auto;
     gap: 20px;
     padding-bottom: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+
+    body {
+        font-size: 16px;
+    }
 }

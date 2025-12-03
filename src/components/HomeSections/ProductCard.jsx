@@ -4,7 +4,7 @@ import Button from '../UI/Button';
 import styles from './ProductCard.module.css';
 import { useCart } from '../../contexts/CartContext'; 
 
-const ProductCard = ({ product }) => { 
+const ProductCard = ({ product, onProductAdded }) => { 
     
     const { addToCart } = useCart(); 
 
@@ -12,8 +12,13 @@ const ProductCard = ({ product }) => {
     
     const handleAddToCart = (e) => {
         e.stopPropagation();
+
         addToCart(product);
         console.log(`Товар ${product.name} додано до кошика!`);
+        
+        if (onProductAdded) {
+            onProductAdded(product.name); 
+        }
     };
 
     if (!product) return null; 

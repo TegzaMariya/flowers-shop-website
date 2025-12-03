@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './HomePage.module.css';
 import { PRODUCTS, FLOWER_TYPES, CATEGORIES } from '../../utils/constants'; 
 import ProductCard from '../../components/HomeSections/ProductCard';
@@ -18,6 +19,9 @@ const HomePage = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [priceRange, setPriceRange] = useState(null);
+
+    const [showNotification, setShowNotification] = useState(false);
+    const [addedProductName, setAddedProductName] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,9 +43,26 @@ const HomePage = () => {
         fetchData();
     }, []); 
 
+    const handleProductAdded = useCallback((productName) => {
+        const cartElement = document.getElementById('main-cart-icon'); 
+        if (cartElement) {
+            cartElement.classList.add(styles.cartAnimation);
+            setTimeout(() => {
+                cartElement.classList.remove(styles.cartAnimation);
+            }, 800); 
+        }
+
+        setAddedProductName(productName);
+        setShowNotification(true);
+
+        setTimeout(() => {
+            setShowNotification(false);
+            setAddedProductName('');
+        }, 5000); 
+    }, []);
+
     const filteredProducts = useMemo(() => {
         const products = allProducts;
-
         let result = products;
         if (searchTerm) {
             const lowerCaseSearch = searchTerm.toLowerCase();
@@ -82,7 +103,11 @@ const HomePage = () => {
                         if (!item || item.id === undefined) return null;
 
                         return item.price !== undefined ? (
-                            <ProductCard key={item.id} product={item} />
+                            <ProductCard 
+                                key={item.id} 
+                                product={item} 
+                                onProductAdded={handleProductAdded}
+                            />
                         ) : (
                             <CategoryCard key={item.id} item={item} />
                         );
@@ -159,6 +184,17 @@ const HomePage = () => {
 
             {renderProductsSection("Квіти на будь-який випадок", categories)}
             {renderProductsSection("Додаткові пропозиції", flowerTypes)}
+
+            {showNotification && (
+                <div className={styles.footerNotification}>
+                    <span>
+                        ✅ "{addedProductName}" успішно додано до кошика!
+                    </span>
+                    <Link to="/cart" className={styles.viewCartButton}>
+                        Перейти до кошика
+                    </Link>
+                </div>
+            )}
         </div>
     );
 };
