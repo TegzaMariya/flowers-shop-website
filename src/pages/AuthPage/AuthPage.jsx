@@ -4,7 +4,7 @@ import Button from '../../components/UI/Button';
 import styles from './AuthPage.module.css';
 import { useAuth } from '../../contexts/AuthContext';
 
-const AuthPage = () => {
+const AuthPage = ({ useAuthHook = useAuth, useNavigateHook = useNavigate }) => { 
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -12,8 +12,8 @@ const AuthPage = () => {
     const [name, setName] = useState('');
     const [error, setError] = useState('');
 
-    const { login, register, isAuth } = useAuth();
-    const navigate = useNavigate();
+    const { login, register, isAuth } = useAuthHook();
+    const navigate = useNavigateHook();
 
     useEffect(() => {
         if (isAuth) {
@@ -32,6 +32,7 @@ const AuthPage = () => {
 
             if (success) {
                 alert(`Ласкаво просимо, ${email}!`);
+                navigate('/'); 
             } else {
                 setError('Помилка входу. Перевірте електронну пошту та пароль.');
             }

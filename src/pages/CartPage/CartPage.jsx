@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import Button from '../../components/UI/Button';
 import styles from './CartPage.module.css';
-import { useCart } from '../../contexts/CartContext';
-import { useCheckout } from '../../hooks/useCheckout';
 
-const CartPage = () => {
+import { useCart as defaultUseCart } from '../../contexts/CartContext'; 
+import { useCheckout as defaultUseCheckout } from '../../hooks/useCheckout';
+
+const CartPage = ({ 
+    useCart = defaultUseCart, 
+    useCheckout = defaultUseCheckout 
+}) => {
     const { cartItems, removeFromCart, increaseCount, decreaseCount, getTotal, clearCart } = useCart();
     const { checkout, loading, error } = useCheckout();
     const total = getTotal();
@@ -23,6 +27,7 @@ const CartPage = () => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
+        setErrorMessage('');
     };
 
     const handleCheckout = async (e) => {
@@ -87,7 +92,11 @@ const CartPage = () => {
 
                 <div className={styles.itemsList}>
                     {cartItems.map((item) => (
-                        <div key={item.id} className={styles.cartItem}>
+                        <div 
+                            key={item.id} 
+                            className={styles.cartItem}
+                            data-testid={`cart-item-${item.id}`}
+                        >
                             <img
                                 src={`/assets/${item.image}`}
                                 alt={item.name}
@@ -96,15 +105,28 @@ const CartPage = () => {
                             <div className={styles.itemDetails}>
                                 <p className={styles.itemName}>{item.name}</p>
                                 <div className={styles.quantityControls}>
-                                    <button onClick={() => decreaseCount(item.id)} className={styles.qtyBtn}>−</button>
+                                    <button 
+                                        onClick={() => decreaseCount(item.id)} 
+                                        className={styles.qtyBtn}
+                                        data-testid={`decrease-${item.id}`}
+                                    >
+                                        −
+                                    </button>
                                     <span>{item.count}</span>
-                                    <button onClick={() => increaseCount(item.id)} className={styles.qtyBtn}>+</button>
+                                    <button 
+                                        onClick={() => increaseCount(item.id)} 
+                                        className={styles.qtyBtn}
+                                        data-testid={`increase-${item.id}`}
+                                    >
+                                        +
+                                    </button>
                                 </div>
                             </div>
                             <span className={styles.itemPrice}>{(item.price * item.count).toFixed(2)} грн.</span>
                             <button
                                 className={styles.removeItemButton}
                                 onClick={() => removeFromCart(item.id)}
+                                data-testid={`remove-${item.id}`}
                             >
                                 &times;
                             </button>
@@ -160,8 +182,8 @@ const CartPage = () => {
                         <option value="cash">Готівка</option>
                     </select>
 
-                    {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
-                    {error && <p className={styles.errorMessage}>{error}</p>}
+                    {errorMessage && <p className={styles.errorMessage} data-testid="validation-error">{errorMessage}</p>}
+                    {error && <p className={styles.errorMessage}>Помилка сервера: {error}</p>}
 
                     <Button
                         type="submit"

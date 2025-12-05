@@ -184,7 +184,6 @@ const HomePage = () => {
 
             {renderProductsSection("Квіти на будь-який випадок", categories)}
             {renderProductsSection("Додаткові пропозиції", flowerTypes)}
-
             {showNotification && (
                 <div className={styles.footerNotification}>
                     <span>

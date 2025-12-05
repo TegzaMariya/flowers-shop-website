@@ -4,10 +4,11 @@ import Button from '../UI/Button';
 import styles from './ProductCard.module.css';
 import { useCart } from '../../contexts/CartContext'; 
 
-const ProductCard = ({ product, onProductAdded }) => { 
-    
-    const { addToCart } = useCart(); 
+const ProductCard = ({ product, onProductAdded, useCartHook = useCart }) => { 
 
+    if (!product) return null; 
+
+    const { addToCart } = useCartHook(); 
     const hasPrice = product.price && product.quantity; 
     
     const handleAddToCart = (e) => {
@@ -20,9 +21,7 @@ const ProductCard = ({ product, onProductAdded }) => {
             onProductAdded(product.name); 
         }
     };
-
-    if (!product) return null; 
-
+    
     return (
         <div className={styles.card}>
 
