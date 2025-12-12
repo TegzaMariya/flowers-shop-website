@@ -6,6 +6,10 @@ import {
 } from 'firebase/auth';
 
 export const useAuthApi = () => {
+    if (typeof window !== "undefined" && window.firebaseMock) {
+        return window.firebaseMock;
+    }
+
     const login = async (email, password) => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -18,7 +22,6 @@ export const useAuthApi = () => {
             };
         } catch (error) {
             console.error('Помилка авторизації Firebase:', error.code, error.message);
-            
             return null;
         }
     };
@@ -29,11 +32,9 @@ export const useAuthApi = () => {
             const user = userCredential.user;
 
             if (name) {
-                await updateProfile(user, {
-                    displayName: name,
-                });
+                await updateProfile(user, { displayName: name });
             }
-            
+
             console.log('Реєстрація Firebase успішна:', user);
 
             return { 

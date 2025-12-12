@@ -5,6 +5,8 @@ import styles from './CartPage.module.css';
 import { useCart as defaultUseCart } from '../../contexts/CartContext'; 
 import { useCheckout as defaultUseCheckout } from '../../hooks/useCheckout';
 
+const SHOP_ADDRESS = "м. Ужгород, вул. Перемоги, 12";
+
 const CartPage = ({ 
     useCart = defaultUseCart, 
     useCheckout = defaultUseCheckout 
@@ -18,6 +20,7 @@ const CartPage = ({
         phone: '',
         delivery: '',
         payment: '',
+        address: '', 
     });
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -26,14 +29,26 @@ const CartPage = ({
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        
+        if (name === 'delivery') {
+            setFormData((prev) => ({ 
+                ...prev, 
+                [name]: value,
+                address: value === 'pickup' ? SHOP_ADDRESS : '' 
+            }));
+        } else {
+            setFormData((prev) => ({ ...prev, [name]: value }));
+        }
+
         setErrorMessage('');
     };
 
     const handleCheckout = async (e) => {
         e.preventDefault();
-
-        if (!formData.name || !formData.phone || !formData.delivery || !formData.payment) {
+        
+        const isDeliverySelected = formData.delivery === 'delivery';
+        
+        if (!formData.name || !formData.phone || !formData.delivery || !formData.payment || (isDeliverySelected && !formData.address)) {
             setErrorMessage('Будь ласка, заповніть усі обов’язкові поля перед оформленням замовлення.');
             return;
         }
@@ -50,7 +65,7 @@ const CartPage = ({
             alert(`✅ Замовлення на суму ${total.toFixed(2)} грн оформлено. Дякуємо!`);
             clearCart();
         } else {
-            alert('Помилка при оформленні замовлення. Спробуйте ще раз.');
+            alert('Помилка при оформленні замовлення. Спробуйте ще раз. ❗️❗️❗️Щоб оформити замовлення, будь ласка, увійдіть або зареєструйтеся❗️❗️❗️');
         }
     };
 
@@ -80,7 +95,7 @@ const CartPage = ({
                     {remainingForFreeShipping > 0 ? (
                         <p>До безкоштовної доставки залишилося {remainingForFreeShipping.toFixed(2)} грн!</p>
                     ) : (
-                        <p>🎉 Ви маєте право на безкоштовну доставку!</p>
+                            <p>🎉 Ви маєте право на безкоштовну доставку!</p>
                     )}
                     <div className={styles.progressBar}>
                         <div
@@ -155,6 +170,7 @@ const CartPage = ({
                         onChange={handleInputChange}
                         required
                     />
+                    
                     <select
                         className={styles.input}
                         name="delivery"
@@ -166,8 +182,32 @@ const CartPage = ({
                             Доставка/Самовивіз*
                         </option>
                         <option value="delivery">Доставка</option>
-                        <option value="pickup">Самовивіз</option>
+                        <option value="pickup">Самовивіз (м. Ужгород)</option>
                     </select>
+
+                    {formData.delivery === 'delivery' && (
+                        <input
+                            className={styles.input}
+                            type="text"
+                            name="address"
+                            placeholder="Адреса доставки (Вулиця, будинок, квартира)*"
+                            value={formData.address}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    )}
+
+                    {formData.delivery === 'pickup' && (
+                        <div className={styles.pickupAddress}>
+                            <p><strong>Адреса самовивозу:</strong> {SHOP_ADDRESS}</p>
+                            <input
+                                type="hidden"
+                                name="address"
+                                value={formData.address}
+                            />
+                        </div>
+                    )}
+
                     <select
                         className={styles.input}
                         name="payment"

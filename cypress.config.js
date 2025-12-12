@@ -1,23 +1,34 @@
-import { defineConfig } from "cypress";
-const coverageTask = require('@cypress/code-coverage/task');
+import { defineConfig } from 'cypress';
+import react from '@vitejs/plugin-react'; 
 
 export default defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {
-      coverageTask(on, config);
-      return config;
-    },
+    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}', 
+    baseUrl: 'http://localhost:5173', 
   },
 
   component: {
+    specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}', 
+    
     devServer: {
-      framework: "react",
-      bundler: "vite",
+      framework: 'react',
+      bundler: 'vite',    
+      
+      viteConfig: {
+        plugins: [
+          react(), 
+        ],
+
+        assetsInclude: ['**/*.css', '**/*.scss', '**/*.sass', '**/*.less'],
+        
+        build: {
+            rollupOptions: {
+                external: [
+                    '**/*.css', '**/*.scss', '**/*.sass', '**/*.less'
+                ]
+            }
+        }
+      },
     },
-    setupNodeEvents(on, config) {
-        coverageTask(on, config);
-        return config;
-    },
-    specPattern: "src/**/*.cy.{js,jsx,ts,tsx}",
   },
 });

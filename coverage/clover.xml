@@ -1,54 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1764960962572" clover="3.2.0">
-  <project timestamp="1764960962572" name="All files">
-    <metrics statements="37" coveredstatements="37" conditionals="21" coveredconditionals="14" methods="9" coveredmethods="9" elements="67" coveredelements="60" complexity="0" loc="37" ncloc="37" packages="2" files="2" classes="2"/>
+<coverage generated="1764963396302" clover="3.2.0">
+  <project timestamp="1764963396302" name="All files">
+    <metrics statements="47" coveredstatements="46" conditionals="29" coveredconditionals="24" methods="9" coveredmethods="9" elements="85" coveredelements="79" complexity="0" loc="47" ncloc="47" packages="2" files="2" classes="2"/>
     <package name="components.UI">
       <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="Button.jsx" path="/Users/tegzamaria/flowers-shop-website/src/components/UI/Button.jsx">
         <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="10" count="8" type="cond" truecount="0" falsecount="1"/>
-        <line num="11" count="162" type="stmt"/>
-        <line num="20" count="8" type="stmt"/>
-        <line num="22" count="8" type="stmt"/>
+        <line num="10" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="11" count="654" type="stmt"/>
+        <line num="20" count="7" type="stmt"/>
+        <line num="22" count="7" type="stmt"/>
       </file>
     </package>
-    <package name="pages.CartPage">
-      <metrics statements="33" coveredstatements="33" conditionals="20" coveredconditionals="14" methods="8" coveredmethods="8"/>
-      <file name="CartPage.jsx" path="/Users/tegzamaria/flowers-shop-website/src/pages/CartPage/CartPage.jsx">
-        <metrics statements="33" coveredstatements="33" conditionals="20" coveredconditionals="14" methods="8" coveredmethods="8"/>
-        <line num="8" count="8" type="stmt"/>
-        <line num="11" count="175" type="stmt"/>
-        <line num="12" count="175" type="stmt"/>
-        <line num="13" count="175" type="stmt"/>
-        <line num="14" count="175" type="stmt"/>
-        <line num="16" count="175" type="stmt"/>
-        <line num="22" count="175" type="stmt"/>
-        <line num="24" count="175" type="stmt"/>
-        <line num="25" count="175" type="stmt"/>
-        <line num="27" count="175" type="stmt"/>
-        <line num="28" count="131" type="stmt"/>
-        <line num="29" count="131" type="stmt"/>
-        <line num="30" count="131" type="stmt"/>
-        <line num="33" count="175" type="stmt"/>
-        <line num="34" count="9" type="stmt"/>
-        <line num="36" count="9" type="cond" truecount="5" falsecount="0"/>
-        <line num="37" count="4" type="stmt"/>
-        <line num="38" count="4" type="stmt"/>
-        <line num="41" count="5" type="stmt"/>
-        <line num="43" count="5" type="stmt"/>
-        <line num="49" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="50" count="3" type="stmt"/>
-        <line num="51" count="3" type="stmt"/>
-        <line num="53" count="2" type="stmt"/>
-        <line num="57" count="175" type="cond" truecount="1" falsecount="0"/>
-        <line num="58" count="8" type="stmt"/>
-        <line num="71" count="167" type="stmt"/>
-        <line num="95" count="334" type="stmt"/>
-        <line num="109" count="6" type="stmt"/>
-        <line num="117" count="6" type="stmt"/>
-        <line num="128" count="5" type="stmt"/>
-        <line num="217" count="8" type="stmt"/>
-        <line num="219" count="8" type="stmt"/>
+    <package name="pages.AuthPage">
+      <metrics statements="43" coveredstatements="42" conditionals="28" coveredconditionals="24" methods="8" coveredmethods="8"/>
+      <file name="AuthPage.jsx" path="/Users/tegzamaria/flowers-shop-website/src/pages/AuthPage/AuthPage.jsx">
+        <metrics statements="43" coveredstatements="42" conditionals="28" coveredconditionals="24" methods="8" coveredmethods="8"/>
+        <line num="7" count="669" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="669" type="stmt"/>
+        <line num="9" count="669" type="stmt"/>
+        <line num="10" count="669" type="stmt"/>
+        <line num="11" count="669" type="stmt"/>
+        <line num="12" count="669" type="stmt"/>
+        <line num="13" count="669" type="stmt"/>
+        <line num="15" count="669" type="stmt"/>
+        <line num="16" count="669" type="stmt"/>
+        <line num="18" count="669" type="stmt"/>
+        <line num="19" count="29" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="24" count="669" type="stmt"/>
+        <line num="25" count="18" type="stmt"/>
+        <line num="26" count="18" type="stmt"/>
+        <line num="28" count="18" type="stmt"/>
+        <line num="30" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="11" type="stmt"/>
+        <line num="33" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="6" type="stmt"/>
+        <line num="35" count="6" type="stmt"/>
+        <line num="37" count="5" type="stmt"/>
+        <line num="40" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="45" count="4" type="stmt"/>
+        <line num="47" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="49" count="4" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="55" count="15" type="stmt"/>
+        <line num="56" count="15" type="stmt"/>
+        <line num="59" count="669" type="stmt"/>
+        <line num="72" count="24" type="stmt"/>
+        <line num="85" count="288" type="stmt"/>
+        <line num="97" count="198" type="stmt"/>
+        <line num="110" count="83" type="stmt"/>
+        <line num="130" count="14" type="stmt"/>
+        <line num="131" count="14" type="stmt"/>
+        <line num="132" count="14" type="stmt"/>
+        <line num="133" count="14" type="stmt"/>
+        <line num="142" count="7" type="stmt"/>
+        <line num="144" count="7" type="stmt"/>
       </file>
     </package>
   </project>

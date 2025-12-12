@@ -6,7 +6,7 @@ export const useCheckout = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const checkout = async ({ name, phone, delivery, payment, items, total, userId = null }) => {
+    const checkout = async ({ name, phone, delivery, payment, address, items, total, userId = null }) => {
         setLoading(true);
         setError(null);
 
@@ -15,6 +15,7 @@ export const useCheckout = () => {
             phone, 
             delivery, 
             payment, 
+            address, 
             items, 
             total,
             userId: userId, 

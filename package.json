@@ -12,6 +12,9 @@
     "format": "prettier --write .",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
+    "cypress:component": "cypress open --component",
+    "cypress:e2e": "cypress open --e2e", 
+    "test:e2e:run": "cypress run --e2e",
     "lint:staged": "echo 'Skipping lint for now'",
     "seed": "node --experimental-json-modules seedFirebase.js"
   },
