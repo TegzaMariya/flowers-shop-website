@@ -77,3 +77,18 @@
 .toggleButton:hover {
     color: var(--color-accent);
 }
+
+.authContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 600px) {
+    .authContainer {
+        flex-direction: column;
+    }
+
+    .formBlock {
+        padding: 15px;
+    }
+}

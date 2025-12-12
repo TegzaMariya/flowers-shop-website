@@ -1,9 +1,16 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(() => {
+        const savedCart = localStorage.getItem('cartItems');
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }, [cartItems]);
 
     const addToCart = (product) => {
         setCartItems(prevItems => {
@@ -12,11 +19,11 @@ export const CartProvider = ({ children }) => {
             if (existingItem) {
                 return prevItems.map(item =>
                     item.id === product.id
-                        ? { ...item, count: item.count + 1 }
+                        ? { ...item, count: item.count + (product.count || 1) }
                         : item
                 );
             } else {
-                return [...prevItems, { ...product, count: 1 }];
+                return [...prevItems, { ...product, count: product.count || 1 }];
             }
         });
     };
@@ -25,25 +32,47 @@ export const CartProvider = ({ children }) => {
         setCartItems(prevItems => prevItems.filter(item => item.id !== id));
     };
 
-    const getTotal = () => {
-        return cartItems.reduce((total, item) => total + (item.price * item.count), 0);
+    const increaseCount = (id) => {
+        setCartItems(prevItems =>
+            prevItems.map(item =>
+                item.id === id ? { ...item, count: item.count + 1 } : item
+            )
+        );
     };
 
-    const contextValue = {
-        cartItems,
-        addToCart,
-        removeFromCart,
-        getTotal,
-        cartCount: cartItems.length
+    const decreaseCount = (id) => {
+        setCartItems(prevItems =>
+            prevItems.map(item =>
+                item.id === id
+                    ? { ...item, count: item.count > 1 ? item.count - 1 : 1 }
+                    : item
+            )
+        );
+    };
+
+    const clearCart = () => {
+        setCartItems([]);
+    };
+
+    const getTotal = () => {
+        return cartItems.reduce((total, item) => total + item.price * item.count, 0);
     };
 
     return (
-        <CartContext.Provider value={contextValue}>
+        <CartContext.Provider
+            value={{
+                cartItems,
+                addToCart,
+                removeFromCart,
+                increaseCount,
+                decreaseCount,
+                getTotal,
+                clearCart,
+            }}
+        >
             {children}
         </CartContext.Provider>
     );
 };
 
-export const useCart = () => {
-    return useContext(CartContext);
-};
+export const useCart = () => useContext(CartContext);

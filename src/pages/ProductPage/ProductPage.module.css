@@ -107,3 +107,69 @@
 .viewCartButton:hover {
     background: #f0f0f0;
 }
+
+@media (max-width: 800px) {
+
+    .container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+
+    .productWrapper {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .imageContainer {
+        width: 100%;
+        max-width: none;
+        border-radius: 8px;
+    }
+
+    .details {
+        padding-top: 0;
+    }
+
+    .productName {
+        font-size: 2rem;
+        margin: 0 0 10px 0;
+    }
+
+    .productDescription {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    .price {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .quantityWrapper {
+        margin-bottom: 20px;
+    }
+
+    .addButton {
+        width: 100%;
+        padding: 12px 0;
+        font-size: 1rem;
+    }
+
+    .footerNotification {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .footerNotification span {
+        font-size: 0.95rem;
+    }
+
+    .viewCartButton {
+        width: 100%;
+        text-align: center;
+    }
+}

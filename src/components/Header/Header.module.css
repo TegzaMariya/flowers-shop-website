@@ -82,3 +82,18 @@
     background-color: var(--color-primary);
     color: white;
 }
+
+.authContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 600px) {
+    .authContainer {
+        flex-direction: column;
+    }
+
+    .formBlock {
+        padding: 15px;
+    }
+}
