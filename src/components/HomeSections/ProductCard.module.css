@@ -52,7 +52,7 @@
 .label {
     font-size: 1rem;
     color: var(--color-primary);
-    font-weight: 500;
+    font-weight: 1000;
     margin-top: 10px;
 }
 
@@ -67,4 +67,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.authContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 600px) {
+    .authContainer {
+        flex-direction: column;
+    }
+
+    .formBlock {
+        padding: 15px;
+    }
 }

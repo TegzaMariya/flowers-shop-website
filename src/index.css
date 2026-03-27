@@ -44,3 +44,15 @@ a:hover {
   margin-top: 15px;
   margin-left: 20px;
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+
+  body {
+    font-size: 16px;
+  }
+}

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { useAuth } from '../../contexts/AuthContext';
 
-const Header = () => {
-  const { isAuth, user, logout } = useAuth(); 
+const Header = ({ useAuthHook = useAuth }) => { 
+  const { isAuth, user, logout } = useAuthHook(); 
 
   return (
     <header className={styles.header}>

@@ -4,20 +4,24 @@ import Button from '../UI/Button';
 import styles from './ProductCard.module.css';
 import { useCart } from '../../contexts/CartContext'; 
 
-const ProductCard = ({ product }) => { 
-    
-    const { addToCart } = useCart(); 
+const ProductCard = ({ product, onProductAdded, useCartHook = useCart }) => { 
 
+    if (!product) return null; 
+
+    const { addToCart } = useCartHook(); 
     const hasPrice = product.price && product.quantity; 
     
     const handleAddToCart = (e) => {
         e.stopPropagation();
+
         addToCart(product);
         console.log(`Товар ${product.name} додано до кошика!`);
+        
+        if (onProductAdded) {
+            onProductAdded(product.name); 
+        }
     };
-
-    if (!product) return null; 
-
+    
     return (
         <div className={styles.card}>
 
